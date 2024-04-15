@@ -6,9 +6,9 @@
 
 @section('content')
 
-<section class="d-flex justify-content-center flex-wrap">
+<section class="d-flex justify-content-center align-items-center flex-wrap">
     <a href="{{route('courses.index')}}" class="text-dark">
-        <div class="card" style="width: 28rem;">
+        <div class="card ms-3 mr-3" style="width: 28rem;">
             <img src="https://cdn-icons-png.flaticon.com/512/2299/2299499.png" class="card-img-top" alt="Imagem de curso">
             <div class="card-body">
               <h3 class="card-title">Cursos disponíveis</h3>
@@ -18,7 +18,7 @@
     </a>
     
     <a href="{{route('inscriptions.index')}}" class="text-dark">
-        <div class="card ms-5" style="width: 28rem;">
+        <div class="card ms-3 mr-3" style="width: 28rem;">
             <img src="https://cdn-icons-png.flaticon.com/512/4052/4052421.png" class="card-img-top" alt="Imagem de inscrição">
             <div class="card-body">
               <h3 class="card-title">Minhas inscrições</h3>

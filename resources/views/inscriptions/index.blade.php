@@ -12,7 +12,7 @@
         <h5 class="card-title fw-bold">Inscrição #{{$inscription->code}}</h5>
           <p class="card-text">{{$inscription->course->name}}</p>
           <p class="card-text">{{$inscription->company}}</p>
-          <p class="card-text">{{$inscription->category}}</p>
+          <p class="card-text">Categoria de {{$inscription->category}}</p>
           <p class="card-text">Inscrito em {{date( 'd/m/Y' , strtotime($inscription->created_at))}}</p>
           <a href="{{route('inscriptions.show', $inscription->id)}}" class="btn btn-primary">Acessar</a>
         </div>

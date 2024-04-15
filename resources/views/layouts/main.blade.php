@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title')</title>
-    <link rel="shortcut icon" href="images/favico.png" type="image/x-icon">
+    <link rel="shortcut icon" href="/images/favico.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/style.css">
@@ -32,15 +32,18 @@
                 </form>
             @endif
             
-            <form action="{{ route('logout') }}" method="POST">@csrf<a class="text-light fs-4"
+            <form action="{{ route('logout') }}" method="POST">@csrf<a class="text-light fs-4 fw-bold"
                     href="{{ route('logout') }}"
                     onclick="event.preventDefault();this.closest('form').submit();">Sair</a>
             </form>
         </div>
     </nav>
-    <div class="container mt-3 mb-3">
+    <div class="container mt-4">
         @yield('content')
     </div>
+    <footer>
+        <p class="mt-3 fs-5">&copy; 2024 André Augusto</p>
+    </footer>
 </body>
 
 </html>
