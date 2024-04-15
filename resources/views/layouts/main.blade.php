@@ -20,7 +20,7 @@
         </div>
     @endif
     <nav class="navbar navbar-dark bg-dark">
-        <div class="container-fluid w-75">
+        <div class="container-fluid justify-content-evenly">
             <a class="navbar-brand" href="{{ route('home') }}"><img id="logo" src="/images/logo.png" alt="logo"></a>
             <article class="text-white fs-3 fw-bold">@yield('subtitle')</article>
             <form class="d-flex" role="search" action="{{ route('courses.index') }}" method="get">

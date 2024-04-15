@@ -1,8 +1,8 @@
 @extends('layouts.main')
 
-@section('title', 'Welcome')
+@section('title', 'Home')
 
-@section('subtitle', 'Bem-vindo, '.Auth::user()->name)
+@section('subtitle', 'Bem-vindo, '.$first_name)
 
 @section('content')
 

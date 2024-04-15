@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -61,10 +62,14 @@ class User extends Authenticatable
         return $cpf;
     }
 
-
-    public function courses(): HasMany
-    {
-        return $this->hasMany(Course::class);
+    public static function getUserFirstName() {
+        // Divide a string em partes usando o espaço como delimitador
+        $full_name_array = explode(" ", Auth::user()->name);
+        
+        // Pega o primeiro elemento do array resultante
+        $first_name = $full_name_array[0];
+        
+        return $first_name;
     }
 
     public function inscriptions(): HasMany
