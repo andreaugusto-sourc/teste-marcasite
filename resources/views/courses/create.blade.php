@@ -47,7 +47,7 @@
 
         <div class="mb-3">
             <label for="formFile" class="form-label">Preço: </label>
-            <input class="form-control" name="value" type="text" id="formFile" placeholder="500.00">
+            <input class="form-control" name="value" type="number" id="formFile" placeholder="500.00">
         </div>
 
         <div class="mb-3">

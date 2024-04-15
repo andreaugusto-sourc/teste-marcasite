@@ -25,13 +25,13 @@
     </div>
 
     <div class="form-floating mb-3">
-        <input type="text" name="phone" class="form-control" id="floatingInput" placeholder="15997610117">
-        <label for="floatingInput">Número de celular</label>
+        <input type="number" name="phone" class="form-control" id="floatingInput" placeholder="15997610117">
+        <label for="floatingInput">Número de celular (Apenas números)</label>
     </div>
 
     <div class="form-floating mb-3">
-        <input type="text" name="telephone" class="form-control" id="floatingInput" placeholder="3272-2329">
-        <label for="floatingInput">Número de telefone fixo</label>
+        <input type="number" name="telephone" class="form-control" id="floatingInput" placeholder="3272-2329">
+        <label for="floatingInput">Número de telefone fixo (Apenas números)</label>
     </div>
 
     <div class="mb-3">

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreInscriptionRequest;
 use App\Models\Inscription;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class InscriptionController extends Controller
 {
@@ -15,7 +16,9 @@ class InscriptionController extends Controller
      */
     public function index()
     {
-        return view('inscriptions.index');
+        $inscriptions = Inscription::getUserInscriptions(Auth::user()->id);
+
+        return view('inscriptions.index', ['inscriptions' => $inscriptions]);
     }
 
     /**
@@ -34,10 +37,10 @@ class InscriptionController extends Controller
     public function store(StoreInscriptionRequest $request, Inscription $inscription )
     {
         $inscription->fill($request->validated());
-        dd($inscription);
+        $inscription->user_id = Auth::user()->id;
         Inscription::setInscription($inscription);
 
-        return redirect()->route('courses.index')->with('msg', 'Inscrição feita com sucesso!');
+        return redirect()->route('inscriptions.index')->with('msg', 'Inscrição feita com sucesso!');
     }
 
     /**
@@ -70,5 +73,12 @@ class InscriptionController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function dashboard(string $id)
+    {
+        $inscriptions = Inscription::getCourseInscriptions($id);
+
+        return view('inscriptions.dashboard', ['inscriptions' => $inscriptions]);
     }
 }

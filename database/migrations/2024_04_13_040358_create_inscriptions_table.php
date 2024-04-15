@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('address', 255);
             $table->string('company', 60);
             $table->string('phone', 11); // confirmar número de caracteres
-            $table->char('telephone',8); // confirmar número de caracteres
+            $table->char('telephone',8)->nullable(); // confirmar número de caracteres
             $table->enum('category', ['student', 'professional', 'associate']);
             $table->string('password');
             $table->unsignedBigInteger("course_id");

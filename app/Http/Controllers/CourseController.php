@@ -41,7 +41,7 @@ class CourseController extends Controller
         $course->fill($request->validated());
         Course::setCourse($course);
 
-        return redirect()->route('courses.dashboard')->with('msg', 'Curso cadastrado com sucesso!');
+        return redirect()->route('dashboard')->with('msg', 'Curso cadastrado com sucesso!');
     }
 
     /**
@@ -97,7 +97,7 @@ class CourseController extends Controller
 
         Course::updateCourse($course, $new_course);
 
-        return redirect()->route('courses.dashboard');
+        return redirect()->route('dashboard');
     }
 
     /**
@@ -107,7 +107,7 @@ class CourseController extends Controller
     {
         Course::deleteCourse($id);
 
-        return redirect()->route('courses.dashboard')->with("msg", "Curso deletado com sucesso!");
+        return redirect()->route('dashboard')->with("msg", "Curso deletado com sucesso!");
     }
 
     public function dashboard()

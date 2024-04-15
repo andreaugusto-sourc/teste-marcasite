@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'cpf'
     ];
 
     /**
@@ -44,6 +45,20 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public static function getUser($id)
+    {
+        $user = User::find($id);
+
+        return $user;
+    }
+
+    public static function cleanCPF($cpf) {
+        // Remove todos os caracteres que não sejam dígitos
+        $cpf = preg_replace('/[^0-9]/', '', $cpf);
+        
+        return $cpf;
     }
 
 

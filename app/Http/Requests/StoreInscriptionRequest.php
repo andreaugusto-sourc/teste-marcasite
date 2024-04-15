@@ -24,7 +24,12 @@ class StoreInscriptionRequest extends FormRequest
         return [
             'email' => 'unique:inscriptions|required',
             'address' => 'required',
-            'company' => 'max:60'
+            'company' => 'max:60',
+            'phone' => 'required',
+            'telephone' => 'nullable',
+            'category' => 'required',
+            'course_id' => 'required',
+            'password' => 'required| min:8 | max:16'
         ];
     }
 }
