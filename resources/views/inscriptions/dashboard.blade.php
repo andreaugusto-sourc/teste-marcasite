@@ -8,6 +8,7 @@
 
 <div class="d-flex justify-content-around align-items-center m-5">
 
+    <a class="w-25 text-decoration-underline fs-3">{{$inscription->code}}</a>
 
     <form action="{{route('inscriptions.destroy',$inscription->id)}}" method="post">
     @csrf

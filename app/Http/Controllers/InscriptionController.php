@@ -16,7 +16,7 @@ class InscriptionController extends Controller
      */
     public function index()
     {
-        $inscriptions = Inscription::getUserInscriptions(Auth::user()->id);
+        $inscriptions = Inscription::getUserInscriptionsWithCourse(Auth::user()->id);
 
         return view('inscriptions.index', ['inscriptions' => $inscriptions]);
     }
@@ -24,11 +24,19 @@ class InscriptionController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(string $id, Request $request)
     {
-        $courses = Course::getCourses();
+        $course = Course::getCourse($id);
+        
+        // caso o usuário volte no meio do cadastro de inscrição de curso
+        if ($request->session()->has('course_id')) {
+            $request->session()->pull('course_id', null);
+        }
 
-        return view('inscriptions.create', ['courses' => $courses]);
+        // armazenando o id numa sessão para guardar o id do curso
+        $request->session()->put('course_id', $id);
+
+        return view('inscriptions.create', ['course' => $course]);
     }
 
     /**
@@ -37,8 +45,13 @@ class InscriptionController extends Controller
     public function store(StoreInscriptionRequest $request, Inscription $inscription )
     {
         $inscription->fill($request->validated());
+        $inscription->course_id = $request->session()->get('course_id');
         $inscription->user_id = Auth::user()->id;
+        $inscription->code = Inscription::getInscriptionCode();
         Inscription::setInscription($inscription);
+
+        // destruindo a sessão com o id do curso
+        $request->session()->pull('course_id', null);
 
         return redirect()->route('inscriptions.index')->with('msg', 'Inscrição feita com sucesso!');
     }
@@ -72,7 +85,9 @@ class InscriptionController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Inscription::deleteInscription($id);
+
+        return redirect()->route('dashboard');
     }
 
     public function dashboard(string $id)

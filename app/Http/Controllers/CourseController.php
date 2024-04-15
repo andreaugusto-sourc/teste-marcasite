@@ -22,7 +22,7 @@ class CourseController extends Controller
             $courses = Course::getCoursesWithSearch($request->search);
         }
 
-        return view('courses.index', ['courses' => $courses]);
+        return view('courses.index', ['courses' => $courses, 'search_courses' => true]);
     }
 
     /**
@@ -47,7 +47,7 @@ class CourseController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $id, Request $request)
     {
         $course = Course::getCourse($id);
 
@@ -56,7 +56,9 @@ class CourseController extends Controller
             return redirect()->route('courses.index');
         }
 
-        return view("courses.show", ['course' => $course]);
+        $number_inscriptions = Course::getCountCourseInscriptions($course);
+
+        return view("courses.show", ['course' => $course, 'number_inscriptions' => $number_inscriptions]);
     }
 
     /**

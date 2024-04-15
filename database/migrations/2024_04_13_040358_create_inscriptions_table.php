@@ -13,12 +13,13 @@ return new class extends Migration
     {
         Schema::create('inscriptions', function (Blueprint $table) {
             $table->id();
+            $table->char('code', 11);
             $table->string('email')->unique();
             $table->string('address', 255);
             $table->string('company', 60);
             $table->string('phone', 11); // confirmar número de caracteres
             $table->char('telephone',8)->nullable(); // confirmar número de caracteres
-            $table->enum('category', ['student', 'professional', 'associate']);
+            $table->string('category', 60);
             $table->string('password');
             $table->unsignedBigInteger("course_id");
             $table->foreign('course_id')->references('id')->on('courses');

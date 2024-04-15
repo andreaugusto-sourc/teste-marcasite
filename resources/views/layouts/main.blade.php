@@ -23,18 +23,22 @@
         <div class="container-fluid justify-content-evenly">
             <a class="navbar-brand" href="{{ route('home') }}"><img id="logo" src="/images/logo.png" alt="logo"></a>
             <article class="text-white fs-3 fw-bold">@yield('subtitle')</article>
-            <form class="d-flex" role="search" action="{{ route('courses.index') }}" method="get">
-                <input class="form-control me-2" name="search" type="search" placeholder="Pesquise algum curso..."
-                    aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Pesquisar</button>
-            </form>
+
+            @if (isset($search_courses))
+                <form class="d-flex" role="search" action="{{ route('courses.index') }}" method="get">
+                    <input class="form-control me-2" name="search" type="search" placeholder="Pesquise algum curso..."
+                        aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Pesquisar</button>
+                </form>
+            @endif
+            
             <form action="{{ route('logout') }}" method="POST">@csrf<a class="text-light fs-4"
                     href="{{ route('logout') }}"
                     onclick="event.preventDefault();this.closest('form').submit();">Sair</a>
             </form>
         </div>
     </nav>
-    <div class="container mt-5">
+    <div class="container mt-3 mb-3">
         @yield('content')
     </div>
 </body>

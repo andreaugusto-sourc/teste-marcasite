@@ -46,6 +46,13 @@ class Course extends Model
         return $courses;
     }
 
+    public static function getCountCourseInscriptions($course)
+    {
+        $number_inscriptions = count($course->inscriptions);
+
+        return $number_inscriptions;
+    }
+
     public static function updateCourse($course, $new_course)
     {
         $course->update($new_course);

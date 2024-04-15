@@ -17,6 +17,7 @@ route::group(['middleware' => ['auth']], function () {
     Route::resource('courses', CourseController::class);
     Route::get('dashboard', [CourseController::class,'dashboard'])->name('dashboard');
     Route::resource('inscriptions', InscriptionController::class);
+    Route::get('/inscriptions/create/{course_id}', [InscriptionController::class, 'create'])->name('inscriptions.create');
     Route::get('dashboard/inscriptions/{course_id}', [InscriptionController::class,'dashboard'])->name('inscriptions.dashboard');
 });
 
