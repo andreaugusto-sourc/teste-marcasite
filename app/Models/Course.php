@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Auth;
 
 class Course extends Model
 {
@@ -34,14 +35,22 @@ class Course extends Model
 
     public static function getCourses()
     {
-        $courses = Course::all();
+        $user_id = Auth::user()->id;
+
+        $courses = Course::whereDoesntHave('inscriptions', function($query) use ($user_id) {
+            $query->where('user_id', $user_id);
+        })->get();
 
         return $courses;
     }
 
     public static function getCoursesWithSearch($search)
     {
-        $courses = Course::where('name', 'LIKE', "%$search%")->get();
+        $user_id = Auth::user()->id;
+
+        $courses = Course::where('name', 'LIKE', "%$search%")::whereDoesntHave('inscriptions', function($query) use ($user_id) {
+            $query->where('user_id', $user_id);
+        })->get();
 
         return $courses;
     }
