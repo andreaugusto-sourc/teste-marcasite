@@ -32,8 +32,8 @@
                     <td style="border: 1px solid #ccc; border-top: none;">{{$inscription->category}}</td>
                     <td style="border: 1px solid #ccc; border-top: none;">{{$inscription->user->cpf}}</td>
                     <td style="border: 1px solid #ccc; border-top: none;">{{$inscription->email}}</td>
-                    <td style="border: 1px solid #ccc; border-top: none;">Não foi feito</td>
-                    <td style="border: 1px solid #ccc; border-top: none;">Não foi feito</td>
+                    <td style="border: 1px solid #ccc; border-top: none;">{{$inscription->status}}</td>
+                    <td style="border: 1px solid #ccc; border-top: none;">{{$inscription->value}}</td>
                 </tr>
             @empty
                 <tr>
