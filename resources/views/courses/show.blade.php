@@ -2,10 +2,11 @@
 
 @section('title', $course->name)
 
-@section('subtitle', $course->name)
+@section('subtitle', "Saiba mais")
 
 @section('content')
 <div class="d-flex flex-column align-items-center fs-4 bg-white p-3 w-50 m-auto rounded">
+    <h2>{{$course->name}}</h2>
     <p>{{$course->description}}</p>
     <p>Período de inscrição: {{date( 'd/m/Y' , strtotime($course->start_inscriptions))}} até {{date( 'd/m/Y' , strtotime($course->end_inscriptions))}}</p>
     <p>Número de inscrições: {{$number_inscriptions}}/{{$course->max_inscriptions}}</p>

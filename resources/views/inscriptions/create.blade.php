@@ -6,12 +6,21 @@
 
 @section('content')
 
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 <form action="{{route('inscriptions.store')}}" method="post">
     @csrf
 
     <div class="mb-3">
         <select class="form-select" aria-label="Default select example" name="category">
-            <option selected disabled>Escolha uma categoria de inscrição:</option>
+            <option selected disabled>Escolha uma categoria de inscrição</option>
             <option>Estudante</option>
             <option>Profissional</option>
             <option>Associado</option>

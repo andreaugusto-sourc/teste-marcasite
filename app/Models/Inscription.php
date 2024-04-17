@@ -52,6 +52,17 @@ class Inscription extends Model
         return $inscriptions;
     }
 
+    public static function getCourseInscriptionsWithSearch($course_id, $request)
+    {
+        $inscriptions = Inscription::with('user')->whereHas('user', function ($query) use ($request) {
+            $query->where('name', 'LIKE', "%$request->name%");
+        })->where([
+            ['course_id', $course_id] , ['category', 'LIKE', "%$request->category%"]
+        ])->get();
+
+        return $inscriptions;
+    }
+
     public static function getUserInscriptionsWithCourse($user_id)
     {
         $inscriptions = Inscription::with('course')->where('user_id', $user_id)->get();
@@ -62,6 +73,11 @@ class Inscription extends Model
     public static function deleteInscription($id)
     {
         Inscription::getInscription($id)->delete();
+    }
+
+    public static function updateInscription($id, $data)
+    {
+        Inscription::getInscription($id)->update($data);
     }
 
     public function course(): BelongsTo

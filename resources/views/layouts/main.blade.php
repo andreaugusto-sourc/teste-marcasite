@@ -38,10 +38,10 @@
             </form>
         </div>
     </nav>
-    <div class="container mt-4">
+    <div class="container mt-4 mb-4">
         @yield('content')
     </div>
-    <footer>
+    <footer class="pb-2 pt-2">
         <p class="mt-3 fs-5">&copy; 2024 André Augusto</p>
     </footer>
 </body>

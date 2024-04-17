@@ -25,8 +25,8 @@ class StoreInscriptionRequest extends FormRequest
             'email' => 'unique:inscriptions|required',
             'address' => 'required',
             'company' => 'max:60',
-            'phone' => 'required',
-            'telephone' => 'nullable',
+            'phone' => 'required | size:11',
+            'telephone' => 'nullable | size:8',
             'category' => 'required',
             'password' => 'required| min:8 | max:16'
         ];

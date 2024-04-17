@@ -19,6 +19,7 @@ route::group(['middleware' => ['auth']], function () {
     Route::resource('inscriptions', InscriptionController::class);
     Route::get('/inscriptions/create/{course_id}', [InscriptionController::class, 'create'])->name('inscriptions.create');
     Route::get('dashboard/inscriptions/{course_id}', [InscriptionController::class,'dashboard'])->name('inscriptions.dashboard');
+    route::get('generate-pdf-inscriptions/{course_id}',[InscriptionController::class, 'generatePdf'])->name('inscriptions.generate.pdf');
 });
 
 require __DIR__.'/auth.php';

@@ -8,6 +8,7 @@ use App\Http\Requests\StoreInscriptionRequest;
 use App\Models\Inscription;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class InscriptionController extends Controller
 {
@@ -69,7 +70,9 @@ class InscriptionController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $inscription = Inscription::getInscription($id);
+
+        return view("inscriptions.edit", ['inscription' => $inscription]);
     }
 
     /**
@@ -77,7 +80,10 @@ class InscriptionController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = $request->all();
+        Inscription::updateInscription($id, $data);
+
+        return redirect()->route('dashboard');
     }
 
     /**
@@ -90,10 +96,24 @@ class InscriptionController extends Controller
         return redirect()->route('dashboard');
     }
 
-    public function dashboard(string $id)
+    public function dashboard(string $id, Request $request)
     {
         $inscriptions = Inscription::getCourseInscriptions($id);
 
-        return view('inscriptions.dashboard', ['inscriptions' => $inscriptions]);
+        // faço um filtro dos registros apenas com a categoria da inscrição e nome do inscrito
+        if ($request->category || $request->name) {
+            $inscriptions = Inscription::getCourseInscriptionsWithSearch($id, $request);
+        }
+
+        return view('inscriptions.dashboard', ['inscriptions' => $inscriptions, 'course_id' => $id]);
+    }
+
+    public function generatePdf($course_id)
+    {
+        $inscriptions = Inscription::getCourseInscriptions($course_id);
+        
+        $pdf = Pdf::loadView('inscriptions.pdf-generate', ['inscriptions' => $inscriptions, 'course_id' => $course_id])->setPaper('a4', 'landscape');
+ 
+        return $pdf->download('lista_inscritos.pdf');
     }
 }
