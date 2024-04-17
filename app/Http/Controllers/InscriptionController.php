@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\CategoryEnum;
+use App\Enums\StatusEnum;
 use App\Models\Course;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreInscriptionRequest;
@@ -37,7 +39,10 @@ class InscriptionController extends Controller
         // armazenando o id numa sessão para guardar o id do curso
         $request->session()->put('course_id', $id);
 
-        return view('inscriptions.create', ['course' => $course]);
+        // pegando enum
+        $category_enums = CategoryEnum::cases();
+
+        return view('inscriptions.create', ['course' => $course, 'category_enums' => $category_enums]);
     }
 
     /**
@@ -72,8 +77,11 @@ class InscriptionController extends Controller
     public function edit(string $id)
     {
         $inscription = Inscription::getInscription($id);
+        // pegando enums
+        $category_enums = CategoryEnum::cases();
+        $status_enums = StatusEnum::cases();
 
-        return view("inscriptions.edit", ['inscription' => $inscription]);
+        return view("inscriptions.edit", ['inscription' => $inscription, 'category_enums' => $category_enums, 'status_enums' => $status_enums]);
     }
 
     /**
@@ -101,12 +109,16 @@ class InscriptionController extends Controller
     {
         $inscriptions = Inscription::getCourseInscriptions($id);
 
-        // faço um filtro dos registros apenas com a categoria da inscrição e nome do inscrito
+        // faço um filtro dos registros com a categoria, status da inscrição e nome do inscrito
         if ($request->category || $request->name || $request->status) {
             $inscriptions = Inscription::getCourseInscriptionsWithSearch($id, $request);
         }
 
-        return view('inscriptions.dashboard', ['inscriptions' => $inscriptions, 'course_id' => $id]);
+        // pegando enums
+        $category_enums = CategoryEnum::cases();
+        $status_enums = StatusEnum::cases();
+
+        return view('inscriptions.dashboard', ['inscriptions' => $inscriptions, 'course_id' => $id, 'category_enums' => $category_enums, 'status_enums' => $status_enums]);
     }
 
     public function generatePdf($course_id)

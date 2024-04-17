@@ -21,9 +21,9 @@
     <div class="mb-3">
         <select class="form-select" aria-label="Default select example" name="category">
             <option selected disabled>Escolha uma categoria de inscrição</option>
-            <option>Estudante</option>
-            <option>Profissional</option>
-            <option>Associado</option>
+                @foreach ($category_enums as $category_enum)
+                    <option>{{$category_enum->value}}</option>
+                @endforeach
           </select>
     </div>
 

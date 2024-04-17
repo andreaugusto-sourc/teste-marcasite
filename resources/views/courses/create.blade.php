@@ -16,25 +16,7 @@
 @endif
     <form action="{{route('courses.store')}}" method="post" enctype="multipart/form-data">
         @csrf
-        {{-- <div class="form-floating mb-3">
-            <input type="text" name="name" class="form-control" id="floatingInput" placeholder="Curso de Java">
-            <label for="floatingInput">Nome</label>
-        </div>
 
-        <div class="form-floating mb-3">
-            <input type="text" name="description" class="form-control" id="floatingInput" placeholder="Curso focado no aprendizado de...">
-            <label for="floatingInput">Descrição</label>
-        </div>
-
-        <div class="form-floating mb-3">
-            <input type="number" name="value" class="form-control" id="floatingInput" placeholder="500.00">
-            <label for="floatingInput">Preço (R$)</label>
-        </div> --}}
-
-        {{-- <div class="form-floating mb-3">
-            <input type="number" name="max_inscriptions" class="form-control" id="floatingInput" placeholder="200">
-            <label for="floatingInput">Número máximo de incrições</label>
-        </div> --}}
         <div class="mb-3">
             <label for="formFile" class="form-label">Nome: </label>
             <input class="form-control" name="name" type="text" id="formFile" placeholder="Curso de Java">

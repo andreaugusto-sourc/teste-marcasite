@@ -12,6 +12,8 @@ class Inscription extends Model
 
     protected $fillable = ['code','email', 'address', 'company', 'phone', 'telephone', 'category','status','value', 'password', 'course_id','user_id'];
 
+    protected $hidden = ['password'];
+    
     protected $casts = [
         'value' => 'float'
     ];
@@ -86,12 +88,12 @@ class Inscription extends Model
 
     public static function payInscription($id)
     {
-        Inscription::getInscription($id)->update(['status' => 'Pago']);
+        Inscription::getInscription($id)->update(['status' => 'Paga']);
     }
 
     public static function cancelInscription($id)
     {
-        Inscription::getInscription($id)->update(['status' => 'Cancelado']);
+        Inscription::getInscription($id)->update(['status' => 'Cancelada']);
     }
 
     public function course(): BelongsTo

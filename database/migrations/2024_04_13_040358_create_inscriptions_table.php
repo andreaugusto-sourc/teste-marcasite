@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('company', 60);
             $table->string('phone', 11); // confirmar número de caracteres
             $table->char('telephone',8)->nullable(); // confirmar número de caracteres
-            $table->string('category', 60);
-            $table->string('status', 60)->default('Aguardando pagamento');
+            $table->enum('category', ["Profissional", "Associado", "Estudante"]);
+            $table->enum('status', ['Aguardando pagamento', 'Paga', "Cancelada"])->default('Aguardando pagamento');
             $table->string('value');
             $table->string('password');
             $table->unsignedBigInteger("course_id");

@@ -20,22 +20,25 @@
     @method('PUT')
     <div class="mb-3">
         <select class="form-select" aria-label="Default select example" name="category">
-            <option selected disabled>Escolha uma categoria de inscrição</option>
-            @if ($inscription->category == "Estudante")
-            <option selected>Estudante</option>
-            <option>Profissional</option>
-            <option>Associado</option>
-            @endif
-            @if ($inscription->category == "Associado")
-            <option>Estudante</option>
-            <option>Profissional</option>
-            <option selected>Associado</option>
-            @endif
-            @if ($inscription->category == "Profissional")
-            <option>Estudante</option>
-            <option selected>Profissional</option>
-            <option>Associado</option>
-            @endif
+            <option disabled>Escolha uma categoria para a inscrição</option>
+            <option selected>{{$inscription->category}}</option>
+            @foreach ($category_enums as $category_enum)
+                @if ($category_enum->value != $inscription->category)
+                    <option>{{$category_enum->value}}</option>
+                @endif
+            @endforeach
+          </select>
+    </div>
+
+    <div class="mb-3">
+        <select class="form-select" aria-label="Default select example" name="status">
+            <option disabled>Escolha um status para a inscrição</option>
+            <option selected>{{$inscription->status}}</option>
+            @foreach ($status_enums as $status_enum)
+                @if ($status_enum->value != $inscription->status)
+                    <option>{{$status_enum->value}}</option>
+                @endif
+            @endforeach
           </select>
     </div>
 

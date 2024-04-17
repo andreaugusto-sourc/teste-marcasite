@@ -25,9 +25,9 @@
                         <label class="form-label" for="status">Status</label>
                         <select name="status" id="status" class="form-control">
                             <option selected disabled>Escolha um status</option>
-                            <option>Cancelado</option>
-                            <option>Aguardando pagamento</option>
-                            <option>Pago</option>
+                            @foreach ($status_enums as $status_enum)
+                            <option>{{$status_enum->value}}</option>
+                            @endforeach
                         </select>
                     </div>
 
@@ -36,9 +36,9 @@
                         <label class="form-label" for="category">Categoria</label>
                         <select name="category" id="category" class="form-control">
                             <option selected disabled>Escolha uma categoria de inscrição</option>
-                            <option>Estudante</option>
-                            <option>Profissional</option>
-                            <option>Associado</option>
+                            @foreach ($category_enums as $category_enum)
+                            <option>{{$category_enum->value}}</option>
+                            @endforeach
                         </select>
                     </div>
 
