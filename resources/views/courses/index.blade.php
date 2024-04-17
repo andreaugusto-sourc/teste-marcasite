@@ -6,6 +6,9 @@
 
 @section('content')
     <section class="d-flex flex-wrap align-items-center justify-content-center">
+        @if(count($courses) == 0)
+        <h1>Sem cursos!</h1>
+        @else
         @foreach ($courses as $course)
             <div class="card mb-3 ms-3 mr-3" style="width: 18rem;">
                 <div class="card-body">
@@ -15,5 +18,6 @@
                 </div>
             </div>
         @endforeach
+        @endif
     </section>
 @endsection

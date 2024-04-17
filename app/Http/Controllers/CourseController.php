@@ -15,7 +15,7 @@ class CourseController extends Controller
     public function index(Request $request)
     {
 
-        $courses = Course::getCourses();
+        $courses = Course::getCoursesNoInscriptions();
 
         // se o usuario busca algum curso especifico
         if ($request->search) {

@@ -47,7 +47,7 @@ class Inscription extends Model
 
     public static function getCourseInscriptions($course_id)
     {
-        $inscriptions = Course::getCourse($course_id)->inscriptions;
+        $inscriptions = Inscription::with('user')->where('course_id', $course_id)->get();
 
         return $inscriptions;
     }
@@ -71,6 +71,6 @@ class Inscription extends Model
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(Course::class);
+        return $this->belongsTo(User::class);
     }
 }

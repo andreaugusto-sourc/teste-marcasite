@@ -35,6 +35,13 @@ class Course extends Model
 
     public static function getCourses()
     {
+        $courses = Course::all();
+
+        return $courses;  
+    }
+
+    public static function getCoursesNoInscriptions()
+    {
         $user_id = Auth::user()->id;
 
         $courses = Course::whereDoesntHave('inscriptions', function($query) use ($user_id) {
