@@ -23,20 +23,20 @@
     @foreach ($inscriptions as $inscription)
         <tr>
         <td>{{$inscription->user->name}}</td>
-        <td>{{$inscription->created_at}}</td>
+        <td>{{date( 'd/m/Y' , strtotime($inscription->created_at))}}</td>
         <td>{{$inscription->category}}</td>
         <td>{{$inscription->user->cpf}}</td>
         <td>{{$inscription->email}}</td>
         <td>Se ta pago ou não</td>
         <td>{{$inscription->value}}</td>
-        <td>
+        <td class="d-flex gap-2">
         <form action="{{route('inscriptions.destroy', $inscription->id)}}" method="post">
         @csrf
         @method('delete')
-        <button type="submit" class="btn btn-danger">Deletar</button>
+        <button type="submit" class="btn btn-danger btn-sm">Deletar</button>
         </form>
 
-        <button type="button" class="btn btn-primary"><a class="text-white text-decoration-none" href="{{route('inscriptions.edit',$inscription->id)}}">Editar</a></button>
+        <button type="button" class="btn btn-primary btn-sm"><a class="text-white text-decoration-none" href="{{route('inscriptions.edit',$inscription->id)}}">Editar</a></button>
         </td>
         </tr>
     @endforeach
