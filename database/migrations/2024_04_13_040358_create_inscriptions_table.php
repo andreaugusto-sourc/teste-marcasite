@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('phone', 11); // confirmar número de caracteres
             $table->char('telephone',8)->nullable(); // confirmar número de caracteres
             $table->string('category', 60);
+            $table->string('status', 60)->default('Aguardando pagamento');
+            $table->string('value');
             $table->string('password');
             $table->unsignedBigInteger("course_id");
             $table->foreign('course_id')->references('id')->on('courses');

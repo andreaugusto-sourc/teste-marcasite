@@ -20,6 +20,8 @@ route::group(['middleware' => ['auth']], function () {
     Route::get('/inscriptions/create/{course_id}', [InscriptionController::class, 'create'])->name('inscriptions.create');
     Route::get('dashboard/inscriptions/{course_id}', [InscriptionController::class,'dashboard'])->name('inscriptions.dashboard');
     route::get('generate-pdf-inscriptions/{course_id}',[InscriptionController::class, 'generatePdf'])->name('inscriptions.generate.pdf');
+    route::get('/inscriptions/pay/{inscription_id}', [InscriptionController::class, 'pay'])->name('inscriptions.pay');
+    route::get('/inscriptions/cancel/{inscription_id}', [InscriptionController::class, 'cancel'])->name('inscriptions.cancel');
 });
 
 require __DIR__.'/auth.php';

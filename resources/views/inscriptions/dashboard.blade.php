@@ -22,6 +22,17 @@
                     </div>
 
                     <div class="col-md-3 col-sm-12">
+                        <label class="form-label" for="status">Status</label>
+                        <select name="status" id="status" class="form-control">
+                            <option selected disabled>Escolha um status</option>
+                            <option>Cancelado</option>
+                            <option>Aguardando pagamento</option>
+                            <option>Pago</option>
+                        </select>
+                    </div>
+
+
+                    <div class="col-md-3 col-sm-12">
                         <label class="form-label" for="category">Categoria</label>
                         <select name="category" id="category" class="form-control">
                             <option selected disabled>Escolha uma categoria de inscrição</option>
@@ -69,8 +80,8 @@
                             <td>{{ $inscription->category }}</td>
                             <td>{{ $inscription->user->cpf }}</td>
                             <td>{{ $inscription->email }}</td>
-                            <td>Não foi feito</td>
-                            <td>Não foi feito</td>
+                            <td>{{ $inscription->status }}</td>
+                            <td>R$ {{number_format($inscription->value, 2)}}</td>
                             <td class="d-flex gap-2">
                                 <form action="{{ route('inscriptions.destroy', $inscription->id) }}" method="post">
                                     @csrf

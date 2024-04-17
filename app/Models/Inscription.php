@@ -10,7 +10,11 @@ class Inscription extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['code','email', 'address', 'company', 'phone', 'telephone', 'category', 'password', 'course_id','user_id'];
+    protected $fillable = ['code','email', 'address', 'company', 'phone', 'telephone', 'category','status','value', 'password', 'course_id','user_id'];
+
+    protected $casts = [
+        'value' => 'float'
+    ];
 
     public static function getInscriptionCode() {
         // Gera uma sequência de números aleatórios com 5 dígitos
@@ -57,7 +61,7 @@ class Inscription extends Model
         $inscriptions = Inscription::with('user')->whereHas('user', function ($query) use ($request) {
             $query->where('name', 'LIKE', "%$request->name%");
         })->where([
-            ['course_id', $course_id] , ['category', 'LIKE', "%$request->category%"]
+            ['course_id', $course_id] , ['category', 'LIKE', "%$request->category%"], ['status', $request->status]
         ])->get();
 
         return $inscriptions;
@@ -78,6 +82,16 @@ class Inscription extends Model
     public static function updateInscription($id, $data)
     {
         Inscription::getInscription($id)->update($data);
+    }
+
+    public static function payInscription($id)
+    {
+        Inscription::getInscription($id)->update(['status' => 'Pago']);
+    }
+
+    public static function cancelInscription($id)
+    {
+        Inscription::getInscription($id)->update(['status' => 'Cancelado']);
     }
 
     public function course(): BelongsTo

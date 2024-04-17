@@ -47,6 +47,7 @@ class InscriptionController extends Controller
     {
         $inscription->fill($request->validated());
         $inscription->course_id = $request->session()->get('course_id');
+        $inscription->value = Course::getCourse($request->session()->get('course_id'))->value;
         $inscription->user_id = Auth::user()->id;
         $inscription->code = Inscription::getInscriptionCode();
         Inscription::setInscription($inscription);
@@ -101,7 +102,7 @@ class InscriptionController extends Controller
         $inscriptions = Inscription::getCourseInscriptions($id);
 
         // faço um filtro dos registros apenas com a categoria da inscrição e nome do inscrito
-        if ($request->category || $request->name) {
+        if ($request->category || $request->name || $request->status) {
             $inscriptions = Inscription::getCourseInscriptionsWithSearch($id, $request);
         }
 
@@ -115,5 +116,20 @@ class InscriptionController extends Controller
         $pdf = Pdf::loadView('inscriptions.pdf-generate', ['inscriptions' => $inscriptions, 'course_id' => $course_id])->setPaper('a4', 'landscape');
  
         return $pdf->download('lista_inscritos.pdf');
+    }
+
+    public function pay(string $id)
+    {
+        Inscription::payInscription($id);
+
+        return redirect()->route('inscriptions.index');
+    }
+
+    public function cancel(string $id)
+    {
+        Inscription::cancelInscription($id);
+        Inscription::deleteInscription($id);
+
+        return redirect()->route('inscriptions.index');
     }
 }

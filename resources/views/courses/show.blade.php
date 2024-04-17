@@ -2,7 +2,7 @@
 
 @section('title', $course->name)
 
-@section('subtitle', "Saiba mais")
+@section('subtitle', "Sobre o Curso")
 
 @section('content')
 <div class="d-flex flex-column align-items-center fs-4 bg-white p-3 w-50 m-auto rounded">
