@@ -6,6 +6,7 @@
 - php artisan serve
 
 ## Instalando dependencias
+- composer require laravel/breeze --dev
 - php artisan breeze:install
 - php artisan migrate
 - npm install
