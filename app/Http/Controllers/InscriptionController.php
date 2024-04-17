@@ -140,7 +140,6 @@ class InscriptionController extends Controller
     public function cancel(string $id)
     {
         Inscription::cancelInscription($id);
-        Inscription::deleteInscription($id);
 
         return redirect()->route('inscriptions.index');
     }

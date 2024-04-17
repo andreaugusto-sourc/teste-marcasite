@@ -71,7 +71,7 @@ class Inscription extends Model
 
     public static function getUserInscriptionsWithCourse($user_id)
     {
-        $inscriptions = Inscription::with('course')->where('user_id', $user_id)->get();
+        $inscriptions = Inscription::with('course')->where([['user_id', $user_id],['status', '!=', 'Cancelada']])->get();
 
         return $inscriptions;
     }

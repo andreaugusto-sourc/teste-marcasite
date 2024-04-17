@@ -45,7 +45,9 @@ class Course extends Model
         $user_id = Auth::user()->id;
 
         $courses = Course::whereDoesntHave('inscriptions', function($query) use ($user_id) {
-            $query->where('user_id', $user_id);
+            $query->where([
+                ['user_id', $user_id], ['status', '!=', 'Cancelada']
+            ]);
         })->get();
 
         return $courses;
@@ -64,7 +66,7 @@ class Course extends Model
 
     public static function getCountCourseInscriptions($course)
     {
-        $number_inscriptions = count($course->inscriptions);
+        $number_inscriptions = count(Inscription::where([['course_id', $course->id],['status', 'Paga']])->get());
 
         return $number_inscriptions;
     }
