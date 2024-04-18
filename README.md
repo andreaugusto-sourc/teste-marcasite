@@ -9,5 +9,4 @@
 - php artisan serve
 
 ## Instalando dependencias
-- composer require laravel/breeze --dev
 - composer require barryvdh/laravel-dompdf
