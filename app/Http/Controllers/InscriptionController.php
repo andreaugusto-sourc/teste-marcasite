@@ -68,7 +68,9 @@ class InscriptionController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $inscription = Inscription::getInscription($id);
+
+        return view('inscriptions.show', ['inscription' => $inscription]);
     }
 
     /**

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\InscriptionController;
+use App\Http\Controllers\PayPalController;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 
@@ -22,6 +23,10 @@ route::group(['middleware' => ['auth']], function () {
     route::get('generate-pdf-inscriptions/{course_id}',[InscriptionController::class, 'generatePdf'])->name('inscriptions.generate.pdf');
     route::get('/inscriptions/pay/{inscription_id}', [InscriptionController::class, 'pay'])->name('inscriptions.pay');
     route::get('/inscriptions/cancel/{inscription_id}', [InscriptionController::class, 'cancel'])->name('inscriptions.cancel');
+
+    // paypal routes
+    route::get('/create/{amount}', [PayPalController::class, 'create']);
+    route::post('/complete', [PayPalController::class, 'complete']);
 });
 
 require __DIR__.'/auth.php';
